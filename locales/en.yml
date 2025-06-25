@@ -1,0 +1,5 @@
+en:
+  theme_metadata:
+    description: Add banner, rotate the contents
+    settings:
+      example_setting: A description of a setting.
