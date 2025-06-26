@@ -1,11 +1,11 @@
 import Component from "@glimmer/component";
-import { service } from "@ember/service";
-import concatClass from "discourse/helpers/concat-class";
 import { tracked } from "@glimmer/tracking";
+import { service } from "@ember/service";
 import htmlSafe from "discourse/helpers/html-safe";
 
 export default class RotatingBanner extends Component {
   @service currentUser;
+
   @tracked bannerIndex = 0;
   @tracked text = settings.banner_text.split("|").map(function (item) {
     return item.trim();
@@ -16,24 +16,48 @@ export default class RotatingBanner extends Component {
     this.startRotating();
   }
 
+  willDestroy() {
+    super.willDestroy(...arguments);
+    clearInterval(this.interval);
+  }
+
   startRotating() {
     this.interval = setInterval(() => {
       this.bannerIndex = (this.bannerIndex + 1) % this.text.length;
     }, settings.banner_delay);
   }
 
-  willDestroy() {
-    clearInterval(this.interval);
+  get shouldRender() {
+    const exemptGroups = settings.banner_exempt_groups
+      .split("|")
+      .map((id) => parseInt(id, 10));
+    const includeGroups = settings.banner_include_groups
+      .split("|")
+      .map((id) => parseInt(id, 10));
+    const userGroups = this.currentUser.groups.map((group) => group.id);
+    const isExempt = userGroups.some((group) => exemptGroups.includes(group));
+    const isIncluded = userGroups.some((group) =>
+      includeGroups.includes(group)
+    );
+
+    if (exemptGroups.length > 0) {
+      return !isExempt;
+    } else if (includeGroups.length > 0) {
+      return isIncluded;
+    } else {
+      return true;
+    }
   }
 
   get currentBannerText() {
-    console.log("current text", this.bannerIndex);
     return this.text[this.bannerIndex];
   }
 
   <template>
-    <h1 class="rotating-banner">
-      <div>{{htmlSafe this.currentBannerText}}</div>
-    </h1>
+    {{#if this.shouldRender}}
+      <div class="rotating-banner">
+        <div>{{htmlSafe this.currentBannerText}}</div>
+      </div>
+    {{/if}}
   </template>
 }
