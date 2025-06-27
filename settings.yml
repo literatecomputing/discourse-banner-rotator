@@ -6,9 +6,9 @@ banner_outlet:
 banner_text:
   type: list
   default: |
-    Win an <a href='https://dronescene.co.uk/competition-details?Win-a-DJI-Air-3S-Fly-More-Combo-or-1-400-of-Drone-Vouchers&id=30'>Air 3S</a> or <a href='https://dronescene.co.uk/competition-details?Win-a-DJI-Air-3S-Fly-More-Combo-or-1-400-of-Drone-Vouchers&id=30'>£1,400 of Drone Vouchers</a>!
-    |<a href='https://dronescene.co.uk/drone-public-liability-insurance' target='_blank'><img src='https://emoji.dronescene.co.uk/forum/drone-v3.png' class='drone-icon'></a> United by passion, backed by insurance <a href='https://dronescene.co.uk/drone-public-liability-insurance' target='_blank'><img src='https://emoji.dronescene.co.uk/forum/drone-v3.png' class='drone-icon'></a>
-    |<a href='https://dronescene.co.uk/drone-public-liability-insurance' target='_blank'>Hobby and Commercial Drone Insurance</a>
+    This is banner 1!
+    |This is banner two.
+    |This is the third banner.
 banner_exempt_groups:
   type: list
   list_type: group
