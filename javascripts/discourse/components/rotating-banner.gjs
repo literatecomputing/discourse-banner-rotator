@@ -28,6 +28,9 @@ export default class RotatingBanner extends Component {
   }
 
   get shouldRender() {
+    if (!this.currentUser) {
+      return true;
+    }
     const exemptGroups = settings.banner_exempt_groups
       .split("|")
       .map((id) => parseInt(id, 10));
