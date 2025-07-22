@@ -8,6 +8,16 @@ export default class RotatingBanner extends Component {
 
   @tracked bannerIndex = 0;
 
+  constructor() {
+    super(...arguments);
+    this.startRotating();
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+    clearInterval(this.interval);
+  }
+
   get text() {
     // Compute the banners part
     const bannerPart = (settings.banners || [])
@@ -22,16 +32,6 @@ export default class RotatingBanner extends Component {
 
     // Combine and return
     return bannerPart.concat(bannerTextPart);
-  }
-
-  constructor() {
-    super(...arguments);
-    this.startRotating();
-  }
-
-  willDestroy() {
-    super.willDestroy(...arguments);
-    clearInterval(this.interval);
   }
 
   startRotating() {
