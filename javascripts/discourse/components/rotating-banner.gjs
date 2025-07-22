@@ -7,9 +7,22 @@ export default class RotatingBanner extends Component {
   @service currentUser;
 
   @tracked bannerIndex = 0;
-  @tracked text = settings.banner_text.split("|").map(function (item) {
-    return item.trim();
-  });
+
+  get text() {
+    // Compute the banners part
+    const bannerPart = (settings.banners || [])
+      .filter((banner) => banner.display)
+      .map((banner) => banner.text);
+
+    // Compute the banner_text part
+    const bannerTextPart = (settings.banner_text || "")
+      .split("|")
+      .map((item) => item.trim())
+      .filter(Boolean); // remove empty strings
+
+    // Combine and return
+    return bannerPart.concat(bannerTextPart);
+  }
 
   constructor() {
     super(...arguments);

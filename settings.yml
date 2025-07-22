@@ -9,6 +9,19 @@ banner_text:
     This is banner 1!
     |This is banner two.
     |This is the third banner.
+
+banners:
+  type: objects
+  default: []
+  schema:
+    name: banner
+    properties:
+      text:
+        type: string
+        default: "This is a banner!"
+      display:
+        type: boolean
+        default: true
 banner_exempt_groups:
   type: list
   list_type: group
