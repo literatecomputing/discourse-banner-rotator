@@ -22,6 +22,7 @@ export default class RotatingBanner extends Component {
     // Compute the banners part
     const bannerPart = (settings.banners || [])
       .filter((banner) => banner.display)
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
       .map((banner) => banner.text);
 
     // Compute the banner_text part

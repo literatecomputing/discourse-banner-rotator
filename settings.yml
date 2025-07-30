@@ -12,13 +12,18 @@ banner_text:
 
 banners:
   type: objects
+  refresh: true
   default: []
   schema:
     name: banner
+    identifier: text
     properties:
       text:
         type: string
         default: "This is a banner!"
+      order:
+        type: integer
+        default: 0
       display:
         type: boolean
         default: true
