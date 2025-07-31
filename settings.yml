@@ -16,8 +16,11 @@ banners:
   default: []
   schema:
     name: banner
-    identifier: text
+    identifier: name
     properties:
+      name:
+        type: string
+        default: "Banner"
       text:
         type: string
         default: "This is a banner!"
