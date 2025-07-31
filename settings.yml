@@ -3,13 +3,6 @@ banner_delay:
   default: 6000
 banner_outlet:
   default: "above-main-container"
-banner_text:
-  type: list
-  default: |
-    This is banner 1!
-    |This is banner two.
-    |This is the third banner.
-
 banners:
   type: objects
   refresh: true
