@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
-import htmlSafe from "discourse/helpers/html-safe";
+import { trustHTML } from "@ember/template";
 
 export default class RotatingBanner extends Component {
   @service currentUser;
@@ -73,7 +73,7 @@ export default class RotatingBanner extends Component {
   <template>
     {{#if this.shouldRender}}
       <div class="rotating-banner">
-        <div>{{htmlSafe this.currentBannerText}}</div>
+        <div>{{trustHTML this.currentBannerText}}</div>
       </div>
     {{/if}}
   </template>
